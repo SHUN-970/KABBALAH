@@ -1,0 +1,1219 @@
+{
+  "version": 1,
+  "documentation": {
+    "purpose": "Guidance for humans and LLMs editing this Semantic Library.",
+    "type_1": {
+      "name": "Atomic Canonical Translation",
+      "editable": true,
+      "description": "Translate exactly one command line into one atomic semantic operation.",
+      "rules": [
+        "One Type 1 rule must match exactly one command line.",
+        "Do not combine multiple command lines into one Type 1 rule.",
+        "Canonical fields must contain only information explicitly and deterministically recoverable from that command.",
+        "Do not infer units, previous values, hidden optical state, or designer intent.",
+        "Use placeholders in the pattern to capture variable fields.",
+        "If the meaning is uncertain, leave the command untranslated. The Compiler will preserve it as raw_command."
+      ],
+      "example": {
+        "pattern": "THI S{surface} {value}",
+        "canonical": {
+          "operation_type": "set_thickness",
+          "surface": "{surface}",
+          "value": "{value}"
+        },
+        "text_template": "Set T{surface} to {value}"
+      }
+    },
+    "type_2": {
+      "name": "Protected Compiler Transaction",
+      "editable": false,
+      "executable_in_library": false,
+      "description": "Protected Type 2 semantics used by the Compiler for GUI-opener cleanup, bounded module annotation, and repeated lens-layout observation cleanup. This registry documents the frozen behavior; it is not an editable Type 2 rule table.",
+      "global_precedence": [
+        "Type 3 structural masks are resolved before Type 2 processing.",
+        "Within Type 2, processing priority is Class C > Class A > Class B."
+      ],
+      "shared_bounded_matcher": {
+        "applies_to": [
+          "A",
+          "B"
+        ],
+        "rules": [
+          "A bounded module candidate starts at a known Type 2 HEAD and closes at a later GO.",
+          "If the same HEAD appears again before GO, shrink the candidate start to the later occurrence of that same HEAD.",
+          "If a different known Type 2 HEAD appears before GO, abandon the current candidate for that pass.",
+          "Class A and Class B use the same bounded-module matching behavior; only their post-match actions differ."
+        ]
+      },
+      "class_c": {
+        "name": "GUI Opener Cleanup",
+        "priority": 1,
+        "action": "delete_opener_only",
+        "description": "Delete known GUI window-opening commands of the form XXX; CAN;. Class C removes only the opener itself and never searches forward for GO.",
+        "known_openers": [
+          "AUT; CAN;",
+          "TES; CAN;",
+          "CAM; CAN;",
+          "VIE; CAN;",
+          "ENV; CAN;",
+          "V3D; CAN;",
+          "VAP; CAN;",
+          "FAB2; CAN;",
+          "ELE; CAN;",
+          "BEA; CAN;",
+          "ANA; CAN;",
+          "RIM; CAN;",
+          "FIE; CAN;",
+          "PMA; CAN;",
+          "FMA; CAN;",
+          "FOO; CAN;",
+          "CAT; CAN;",
+          "FOV; CAN;",
+          "SPO; CAN;",
+          "QUA; CAN;",
+          "RAD; CAN;",
+          "GDE; CAN;",
+          "GLS; CAN;",
+          "MTF; CAN;",
+          "BIO; CAN;",
+          "PSF; CAN;",
+          "LSF; CAN;",
+          "WAV; CAN;",
+          "PAR; CAN;",
+          "BPR; CAN;",
+          "BSP; CAN;",
+          "CEF; CAN;",
+          "IMS; CAN;",
+          "FAB1; CAN;",
+          "COS; CAN;",
+          "WEI; CAN;",
+          "ALI; CAN;",
+          "SPE; CAN;",
+          "TRA; CAN;",
+          "GHO; CAN;",
+          "NAR; CAN;",
+          "TOR; CAN;",
+          "TOD; CAN;",
+          "LUM; CAN;",
+          "!TOLFDIF; CAN;",
+          "!TOLMONTE; CAN;",
+          "LIB; CAN;",
+          "UGR; CAN;"
+        ]
+      },
+      "class_a": {
+        "name": "Module Semantic Transaction",
+        "priority": 2,
+        "action": "keep_transaction_and_attach_annotation",
+        "description": "Keep the complete matched HEAD...GO transaction and attach a basic, head-level semantic annotation. Do not infer why the module was called or reinterpret it from surrounding workflow context.",
+        "modules": [
+          {
+            "head": "AUT",
+            "text": "Set and run optimization"
+          },
+          {
+            "head": "TES",
+            "text": "Run Test Plate Fitting"
+          },
+          {
+            "head": "CAM",
+            "text": "Run Zoom Cam Design"
+          },
+          {
+            "head": "ENV",
+            "text": "Run Environmental Change"
+          },
+          {
+            "head": "ALI",
+            "text": "Run Alignment Optimization"
+          },
+          {
+            "head": "VAP",
+            "text": "View Apertures"
+          },
+          {
+            "head": "FAB2",
+            "text": "View Interferogram"
+          },
+          {
+            "head": "ELE",
+            "text": "View CODE V Drawing"
+          },
+          {
+            "head": "BEA",
+            "text": "Run Gaussian Beam Trace"
+          },
+          {
+            "head": "ANA",
+            "text": "Run First/Third Order Analysis"
+          },
+          {
+            "head": "RIM",
+            "text": "View Aberration Curves"
+          },
+          {
+            "head": "FIE",
+            "text": "View Field Curves"
+          },
+          {
+            "head": "PMA",
+            "text": "View Pupil Map"
+          },
+          {
+            "head": "FMA",
+            "text": "View Field Map"
+          },
+          {
+            "head": "FOO",
+            "text": "View Footprint Plot"
+          },
+          {
+            "head": "CAT",
+            "text": "View Catseye Plot"
+          },
+          {
+            "head": "FOV",
+            "text": "View Biocular FOV Plot"
+          },
+          {
+            "head": "SPO",
+            "text": "View Spot Diagram"
+          },
+          {
+            "head": "QUA",
+            "text": "Run Quadrant Analysis"
+          },
+          {
+            "head": "RAD",
+            "text": "Run Radial Energy Analysis"
+          },
+          {
+            "head": "GDE",
+            "text": "Run Detector Analysis"
+          },
+          {
+            "head": "GLS",
+            "text": "View Line Spread Function"
+          },
+          {
+            "head": "MTF",
+            "text": "View MTF"
+          },
+          {
+            "head": "BIO",
+            "text": "Run Biocular Analysis"
+          },
+          {
+            "head": "PSF",
+            "text": "View PSF"
+          },
+          {
+            "head": "LSF",
+            "text": "View LSF"
+          },
+          {
+            "head": "WAV",
+            "text": "View Wavefront Analysis"
+          },
+          {
+            "head": "PAR",
+            "text": "Run Partial Coherence Analysis"
+          },
+          {
+            "head": "BPR",
+            "text": "Run FFT Beam Propagation"
+          },
+          {
+            "head": "BSP",
+            "text": "Run Beam Synthesis Propagation"
+          },
+          {
+            "head": "CEF",
+            "text": "Run Fiber Coupling Analysis"
+          },
+          {
+            "head": "IMS",
+            "text": "Run 2D Image Simulation"
+          },
+          {
+            "head": "FAB1",
+            "text": "Generate Fabrication Data Tables"
+          },
+          {
+            "head": "COS",
+            "text": "Run Cost Analysis"
+          },
+          {
+            "head": "WEI",
+            "text": "Run Weight Analysis"
+          },
+          {
+            "head": "SPE",
+            "text": "Run Spectral Analysis"
+          },
+          {
+            "head": "TRA",
+            "text": "Run Transmission Analysis"
+          },
+          {
+            "head": "GHO",
+            "text": "Run Ghost Image Analysis"
+          },
+          {
+            "head": "NAR",
+            "text": "Run Narcissus Analysis"
+          },
+          {
+            "head": "TOR",
+            "text": "Run Tolerancing Analysis"
+          },
+          {
+            "head": "TOD",
+            "text": "View Distortion"
+          },
+          {
+            "head": "LUM",
+            "text": "Run Illumination Analysis"
+          }
+        ],
+        "context_policy": "Semantic overlap is acceptable. Translate the basic meaning of the module head only. For example, PSF remains 'View PSF' when called from tolerancing; TOR remains 'Run Tolerancing Analysis' regardless of which internal analysis it invokes."
+      },
+      "class_b": {
+        "name": "Repeated Lens-layout Observation Cleanup",
+        "priority": 3,
+        "action": "delete_whole_transaction",
+        "description": "Delete only the high-frequency, low-information lens-layout viewing transactions. Other analysis-viewing modules remain Class A and are preserved.",
+        "modules": [
+          {
+            "head": "VIE",
+            "meaning": "View Lens"
+          },
+          {
+            "head": "V3D",
+            "meaning": "3D Viewing"
+          }
+        ]
+      },
+      "dataset_rationale": "Preserve analysis-viewing operations such as MTF, PSF, aberration, propagation, coupling, and tolerancing because their timing records which information the human designer chose to inspect at each stage. This human-attention signal may help future AI systems learn selective evaluation policies and avoid recomputing every analysis at every step.",
+      "main_ui_guidance": {
+        "recommended_prompt": "Delete repeated lens-layout views? (MTF, PSF, tolerancing, and other analysis operations will be preserved.)"
+      },
+      "warning": "Do not create, modify, generalize, or reinterpret Type 2 behavior through ordinary Semantic Library editing. Type 2 is protected Compiler behavior.",
+      "llm_instruction": "Treat this Type 2 registry as read-only documentation of protected Compiler behavior. Do not propose Type 2 edits unless the user explicitly asks to change the Compiler protocol."
+    },
+    "type_3": {
+      "name": "Exact High-level Semantic Annotation",
+      "editable": true,
+      "description": "Attach a high-level human semantic label to one exact contiguous command sequence.",
+      "rules": [
+        "Type 3 uses exact sequence matching.",
+        "Every command in the defined sequence is part of the match.",
+        "Do not define Type 3 as a head-tail range.",
+        "Do not search forward from a start command to a later end command.",
+        "Do not generalize missing intermediate commands.",
+        "Type 3 adds an annotation only; it does not replace the underlying atomic operations.",
+        "Use Type 3 only when the supplied log contains the exact sequence or when the user explicitly defines that sequence."
+      ],
+      "example": {
+        "exact_commands": [
+          "SPS QCN S3",
+          "SCC S3 C4 0",
+          "SCC S3 C5 0",
+          "SCC S3 C6 0"
+        ],
+        "text": "Convert S3 to Qcon and vary its 4th-, 6th-, and 8th-order Qcon coefficients"
+      }
+    },
+    "llm_guidance": [
+      "Prefer conservative edits.",
+      "Do not invent semantics for unfamiliar commands.",
+      "Do not edit Type 2 behavior.",
+      "For Type 1, one command line equals one atomic semantic rule.",
+      "For Type 3, match the complete exact contiguous command sequence.",
+      "Follow documentation.language_style for wording only; never convert those prose guidelines into Compiler conditions.",
+      "Leave SAV, RES, and local-file RUN macro commands untranslated unless the user explicitly requests otherwise.",
+      "When uncertain, leave existing content unchanged."
+    ],
+    "language_style": {
+      "name": "Semantic Wording Style",
+      "executable": false,
+      "purpose": "Wording guidance for humans and LLMs when authoring Type 1 text. This section is documentation only. It must never be interpreted as a Compiler matching rule, transaction detector, or conditional execution rule.",
+      "rules": [
+        "Use 'Set ...' for direct optical, structural, field, wavelength, or system-parameter assignment.",
+        "Use 'Vary ...' when a CODE V control command opens a parameter as an optimization variable.",
+        "Use 'Freeze ...' when a CODE V control command freezes an optimization variable.",
+        "Use 'Constrain ...' for known optimization constraints used inside AUT...GO, such as EFL, OAL, MXT, MNT, MNE, MNA, and MAE.",
+        "Use 'Configure ...' for known optimizer run controls used inside AUT...GO, such as MXC, MNC, and IMP.",
+        "Use 'Enable ...' for known AUT display/output options such as EFP and DRA.",
+        "Do not use 'Set ...' in text templates for known AUT...GO optimization constraints or optimizer controls.",
+        "Use the CODE V term 'Refract Mode' for RMD translations.",
+        "Preserve concise optical notation when it is already readable, for example T3, S7, EFL, OAL, EPD, F-number, and NA.",
+        "SAV, RES, and RUN commands that execute local macro files do not need Type 1 translation; raw_command is acceptable.",
+        "Internal CV_MACRO calls may be translated when their exact semantics are known and they do not depend on a local macro-file path.",
+        "These wording rules guide library authors only. Do not infer hidden context, designer intent, or transaction membership from them."
+      ]
+    }
+  },
+  "type1_rules": [
+    {
+      "rule_id": "T1_THI",
+      "pattern": "THI S{surface} {value}",
+      "canonical": {
+        "operation_type": "set_thickness",
+        "surface": "{surface}",
+        "value": "{value}"
+      },
+      "text_template": "Set T{surface} to {value}"
+    },
+    {
+      "rule_id": "T1_RDY",
+      "pattern": "RDY S{surface} {value}",
+      "canonical": {
+        "operation_type": "set_y_radius",
+        "surface": "{surface}",
+        "value": "{value}"
+      },
+      "text_template": "Set Y-radius of S{surface} to {value}"
+    },
+    {
+      "rule_id": "T1_STO",
+      "pattern": "STO S{surface}",
+      "canonical": {
+        "operation_type": "set_stop",
+        "surface": "{surface}"
+      },
+      "text_template": "Set S{surface} as stop"
+    },
+    {
+      "rule_id": "T1_SPH",
+      "pattern": "SPH S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "sphere"
+      },
+      "text_template": "Set surface type of S{surface} to Sphere"
+    },
+    {
+      "rule_id": "T1_CON",
+      "pattern": "CON S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "conic"
+      },
+      "text_template": "Set surface type of S{surface} to Conic"
+    },
+    {
+      "rule_id": "T1_SPS_QCN",
+      "pattern": "SPS QCN S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "qcon_asphere"
+      },
+      "text_template": "Set surface type of S{surface} to Qcon Asphere"
+    },
+    {
+      "rule_id": "T1_SPS_QBF",
+      "pattern": "SPS QBF S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "qbfs_asphere"
+      },
+      "text_template": "Set surface type of S{surface} to Qbfs Asphere"
+    },
+    {
+      "rule_id": "T1_AAS",
+      "pattern": "AAS S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "anamorphic_asphere"
+      },
+      "text_template": "Set surface type of S{surface} to Anamorphic Asphere"
+    },
+    {
+      "rule_id": "T1_CYL",
+      "pattern": "CYL S{surface}",
+      "canonical": {
+        "operation_type": "set_surface_type",
+        "surface": "{surface}",
+        "surface_type": "cylinder"
+      },
+      "text_template": "Set surface type of S{surface} to Cylinder"
+    },
+    {
+      "rule_id": "T1_SLB",
+      "pattern": "SLB S{surface} {label}",
+      "canonical": {
+        "operation_type": "set_surface_label",
+        "surface": "{surface}",
+        "label": "{label}"
+      },
+      "text_template": "Set label of S{surface} to {label}"
+    },
+    {
+      "rule_id": "T1_THC_VARY",
+      "pattern": "THC S{surface} 0",
+      "canonical": {
+        "operation_type": "vary_thickness",
+        "surface": "{surface}"
+      },
+      "text_template": "Vary T{surface}"
+    },
+    {
+      "rule_id": "T1_THC_FREEZE",
+      "pattern": "THC S{surface} 100",
+      "canonical": {
+        "operation_type": "freeze_thickness",
+        "surface": "{surface}"
+      },
+      "text_template": "Freeze T{surface}"
+    },
+    {
+      "rule_id": "T1_CCY_VARY",
+      "pattern": "CCY S{surface} 0",
+      "canonical": {
+        "operation_type": "vary_y_radius",
+        "surface": "{surface}"
+      },
+      "text_template": "Vary Y-radius of S{surface}"
+    },
+    {
+      "rule_id": "T1_CCY_FREEZE",
+      "pattern": "CCY S{surface} 100",
+      "canonical": {
+        "operation_type": "freeze_y_radius",
+        "surface": "{surface}"
+      },
+      "text_template": "Freeze Y-radius of S{surface}"
+    },
+    {
+      "rule_id": "T1_GC1_VARY",
+      "pattern": "GC1 S{surface} 0",
+      "canonical": {
+        "operation_type": "vary_glass",
+        "surface": "{surface}"
+      },
+      "text_template": "Vary glass of S{surface}"
+    },
+    {
+      "rule_id": "T1_GC1_FREEZE",
+      "pattern": "GC1 S{surface} 100",
+      "canonical": {
+        "operation_type": "freeze_glass",
+        "surface": "{surface}"
+      },
+      "text_template": "Freeze glass of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C4_VARY",
+      "pattern": "SCC S{surface} C4 0",
+      "canonical": {
+        "operation_type": "vary_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C4",
+        "order": 4
+      },
+      "text_template": "Vary 4th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C4_FREEZE",
+      "pattern": "SCC S{surface} C4 100",
+      "canonical": {
+        "operation_type": "freeze_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C4",
+        "order": 4
+      },
+      "text_template": "Freeze 4th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C5_VARY",
+      "pattern": "SCC S{surface} C5 0",
+      "canonical": {
+        "operation_type": "vary_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C5",
+        "order": 6
+      },
+      "text_template": "Vary 6th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C5_FREEZE",
+      "pattern": "SCC S{surface} C5 100",
+      "canonical": {
+        "operation_type": "freeze_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C5",
+        "order": 6
+      },
+      "text_template": "Freeze 6th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C6_VARY",
+      "pattern": "SCC S{surface} C6 0",
+      "canonical": {
+        "operation_type": "vary_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C6",
+        "order": 8
+      },
+      "text_template": "Vary 8th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_SCC_C6_FREEZE",
+      "pattern": "SCC S{surface} C6 100",
+      "canonical": {
+        "operation_type": "freeze_qcon_coefficient",
+        "surface": "{surface}",
+        "coefficient_code": "C6",
+        "order": 8
+      },
+      "text_template": "Freeze 8th-order Qcon coefficient of S{surface}"
+    },
+    {
+      "rule_id": "T1_GL1_MODEL",
+      "pattern": "GL1 S{surface} {refractive_index}:{abbe_number}",
+      "canonical": {
+        "operation_type": "set_model_glass",
+        "surface": "{surface}",
+        "refractive_index": "{refractive_index}",
+        "abbe_number": "{abbe_number}"
+      },
+      "text_template": "Set glass of S{surface} to n={refractive_index}, V={abbe_number}"
+    },
+    {
+      "rule_id": "T1_GL1_CATALOG",
+      "pattern": "GL1 S{surface} {glass}",
+      "canonical": {
+        "operation_type": "set_glass",
+        "surface": "{surface}",
+        "glass": "{glass}"
+      },
+      "text_template": "Set glass of S{surface} to {glass}"
+    },
+    {
+      "rule_id": "T1_RMD_REFL",
+      "pattern": "RMD S{surface} REFL",
+      "canonical": {
+        "operation_type": "set_refract_mode",
+        "surface": "{surface}",
+        "refract_mode": "reflect"
+      },
+      "text_template": "Set Refract Mode of S{surface} to Reflect"
+    },
+    {
+      "rule_id": "T1_RMD_TIRO",
+      "pattern": "RMD S{surface} TIRO",
+      "canonical": {
+        "operation_type": "set_refract_mode",
+        "surface": "{surface}",
+        "refract_mode": "tir_only"
+      },
+      "text_template": "Set Refract Mode of S{surface} to TIR Only"
+    },
+    {
+      "rule_id": "T1_RMD_REFR",
+      "pattern": "RMD S{surface} REFR",
+      "canonical": {
+        "operation_type": "set_refract_mode",
+        "surface": "{surface}",
+        "refract_mode": "refract"
+      },
+      "text_template": "Set Refract Mode of S{surface} to Refract"
+    },
+    {
+      "rule_id": "T1_CIR",
+      "pattern": "CIR S{surface} {value}",
+      "canonical": {
+        "operation_type": "set_clear_aperture",
+        "surface": "{surface}",
+        "value": "{value}"
+      },
+      "text_template": "Set clear aperture of S{surface} to {value}"
+    },
+    {
+      "rule_id": "T1_DEL_SURFACE",
+      "pattern": "DEL S{surface}",
+      "canonical": {
+        "operation_type": "delete_surface",
+        "surface": "{surface}"
+      },
+      "text_template": "Delete S{surface}"
+    },
+    {
+      "rule_id": "T1_SCA_EFL",
+      "pattern": "SCA EFL {value}",
+      "canonical": {
+        "operation_type": "scale_to_efl",
+        "value": "{value}"
+      },
+      "text_template": "Scale system to EFL {value}"
+    },
+    {
+      "rule_id": "T1_AUT_EFL",
+      "pattern": "EFL Z{zoom} = {value}",
+      "canonical": {
+        "operation_type": "constrain_efl",
+        "zoom": "{zoom}",
+        "value": "{value}"
+      },
+      "text_template": "Constrain EFL of Z{zoom} to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_OAL",
+      "pattern": "OAL S{start}..{end} Z{zoom} = {value}",
+      "canonical": {
+        "operation_type": "constrain_oal",
+        "start_surface": "{start}",
+        "end": "{end}",
+        "zoom": "{zoom}",
+        "value": "{value}"
+      },
+      "text_template": "Constrain OAL from S{start} to {end} in Z{zoom} to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MXT",
+      "pattern": "MXT {value}",
+      "canonical": {
+        "operation_type": "constrain_max_glass_center_thickness",
+        "value": "{value}"
+      },
+      "text_template": "Constrain maximum glass center thickness to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MNT",
+      "pattern": "MNT {value}",
+      "canonical": {
+        "operation_type": "constrain_min_glass_center_thickness",
+        "value": "{value}"
+      },
+      "text_template": "Constrain minimum glass center thickness to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MNE",
+      "pattern": "MNE {value}",
+      "canonical": {
+        "operation_type": "constrain_min_glass_edge_thickness",
+        "value": "{value}"
+      },
+      "text_template": "Constrain minimum glass edge thickness to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MNA",
+      "pattern": "MNA {value}",
+      "canonical": {
+        "operation_type": "constrain_min_air_center_thickness",
+        "value": "{value}"
+      },
+      "text_template": "Constrain minimum air center thickness to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MAE",
+      "pattern": "MAE {value}",
+      "canonical": {
+        "operation_type": "constrain_min_air_edge_thickness",
+        "value": "{value}"
+      },
+      "text_template": "Constrain minimum air edge thickness to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MXC",
+      "pattern": "MXC {value}",
+      "canonical": {
+        "operation_type": "configure_max_optimization_cycles",
+        "value": "{value}"
+      },
+      "text_template": "Configure maximum optimization cycles to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_MNC",
+      "pattern": "MNC {value}",
+      "canonical": {
+        "operation_type": "configure_min_optimization_cycles",
+        "value": "{value}"
+      },
+      "text_template": "Configure minimum optimization cycles to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_IMP",
+      "pattern": "IMP {value}",
+      "canonical": {
+        "operation_type": "configure_fractional_improvement",
+        "value": "{value}"
+      },
+      "text_template": "Configure fractional improvement to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_EFP_ALL_Y",
+      "pattern": "EFP ALL Y",
+      "canonical": {
+        "operation_type": "enable_error_function_vs_cycles"
+      },
+      "text_template": "Enable error function vs. cycles"
+    },
+    {
+      "rule_id": "T1_AUT_DRA_YES",
+      "pattern": "DRA S{start}..{end} YES",
+      "canonical": {
+        "operation_type": "enable_cycle_drawing",
+        "start_surface": "{start}",
+        "end": "{end}"
+      },
+      "text_template": "Enable design drawing each cycle for S{start}..{end}"
+    },
+    {
+      "rule_id": "T1_FIELD_INSERT",
+      "pattern": "INS F{field}+1",
+      "canonical": {
+        "operation_type": "insert_field_after",
+        "field": "{field}"
+      },
+      "text_template": "Insert field after F{field}"
+    },
+    {
+      "rule_id": "T1_FIELD_X",
+      "pattern": "in CV_MACRO:cvsetfield X {value} F{field}",
+      "canonical": {
+        "operation_type": "set_field_x",
+        "field": "{field}",
+        "value": "{value}"
+      },
+      "text_template": "Set X of F{field} to {value}"
+    },
+    {
+      "rule_id": "T1_FIELD_Y",
+      "pattern": "in CV_MACRO:cvsetfield Y {value} F{field}",
+      "canonical": {
+        "operation_type": "set_field_y",
+        "field": "{field}",
+        "value": "{value}"
+      },
+      "text_template": "Set Y of F{field} to {value}"
+    },
+    {
+      "rule_id": "T1_FIELD_TYPE_ANG",
+      "pattern": "in CV_MACRO:cvsetfldtype ANG",
+      "canonical": {
+        "operation_type": "set_field_type",
+        "field_type": "object_angle"
+      },
+      "text_template": "Set field type to Object Angle"
+    },
+    {
+      "rule_id": "T1_FIELD_CONVERT_ANG",
+      "pattern": "in cv_macro:cvtfield ANG",
+      "canonical": {
+        "operation_type": "convert_field_type",
+        "field_type": "object_angle"
+      },
+      "text_template": "Convert field type to Object Angle"
+    },
+    {
+      "rule_id": "T1_FIELD_TYPE_IMG",
+      "pattern": "in CV_MACRO:cvsetfldtype IMG",
+      "canonical": {
+        "operation_type": "set_field_type",
+        "field_type": "paraxial_image_height"
+      },
+      "text_template": "Set field type to Paraxial Image Height"
+    },
+    {
+      "rule_id": "T1_FIELD_CONVERT_IMG",
+      "pattern": "in cv_macro:cvtfield IMG",
+      "canonical": {
+        "operation_type": "convert_field_type",
+        "field_type": "paraxial_image_height"
+      },
+      "text_template": "Convert field type to Paraxial Image Height"
+    },
+    {
+      "rule_id": "T1_FIELD_TYPE_OBJ",
+      "pattern": "in CV_MACRO:cvsetfldtype OBJ",
+      "canonical": {
+        "operation_type": "set_field_type",
+        "field_type": "object_height"
+      },
+      "text_template": "Set field type to Object Height"
+    },
+    {
+      "rule_id": "T1_FIELD_CONVERT_OBJ",
+      "pattern": "in cv_macro:cvtfield OBJ",
+      "canonical": {
+        "operation_type": "convert_field_type",
+        "field_type": "object_height"
+      },
+      "text_template": "Convert field type to Object Height"
+    },
+    {
+      "rule_id": "T1_FIELD_TYPE_RIH",
+      "pattern": "in CV_MACRO:cvsetfldtype RIH",
+      "canonical": {
+        "operation_type": "set_field_type",
+        "field_type": "real_image_height"
+      },
+      "text_template": "Set field type to Real Image Height"
+    },
+    {
+      "rule_id": "T1_FIELD_CONVERT_RIH",
+      "pattern": "in cv_macro:cvtfield RIH",
+      "canonical": {
+        "operation_type": "convert_field_type",
+        "field_type": "real_image_height"
+      },
+      "text_template": "Convert field type to Real Image Height"
+    },
+    {
+      "rule_id": "T1_WAVELENGTH_INSERT",
+      "pattern": "IN CV_MACRO:inswl {index}+1",
+      "canonical": {
+        "operation_type": "insert_wavelength_after",
+        "index": "{index}"
+      },
+      "text_template": "Insert wavelength after W{index}"
+    },
+    {
+      "rule_id": "T1_WAVELENGTH_SET",
+      "pattern": "WL W{index} {value}",
+      "canonical": {
+        "operation_type": "set_wavelength",
+        "index": "{index}",
+        "value_nm": "{value}"
+      },
+      "text_template": "Set W{index} to {value} nm"
+    },
+    {
+      "rule_id": "T1_EPD",
+      "pattern": "EPD {value}",
+      "canonical": {
+        "operation_type": "set_epd",
+        "value": "{value}"
+      },
+      "text_template": "Set EPD to {value}"
+    },
+    {
+      "rule_id": "T1_FNO",
+      "pattern": "FNO {value}",
+      "canonical": {
+        "operation_type": "set_f_number",
+        "value": "{value}"
+      },
+      "text_template": "Set F-number to {value}"
+    },
+    {
+      "rule_id": "T1_NA",
+      "pattern": "NA {value}",
+      "canonical": {
+        "operation_type": "set_image_na",
+        "value": "{value}"
+      },
+      "text_template": "Set image NA to {value}"
+    },
+    {
+      "rule_id": "T1_NAO",
+      "pattern": "NAO {value}",
+      "canonical": {
+        "operation_type": "set_object_na",
+        "value": "{value}"
+      },
+      "text_template": "Set object NA to {value}"
+    },
+    {
+      "rule_id": "T1_CUSTOM_001",
+      "pattern": "DST S0..I W{wavelength_number} Z{zoom_number} < {number}",
+      "canonical": {
+        "operation_type": "constrain",
+        "semantic_components": [
+          {
+            "source": "DST",
+            "syntax": "literal",
+            "semantic": "distortion"
+          },
+          {
+            "source": "S0..I",
+            "syntax": "literal",
+            "semantic": "from S0 to I"
+          },
+          {
+            "source": "W{wavelength_number}",
+            "syntax": "prefix_number",
+            "semantic": "wavelength",
+            "prefix": "W",
+            "number": "{wavelength_number}"
+          },
+          {
+            "source": "Z{zoom_number}",
+            "syntax": "prefix_number",
+            "semantic": "zoom",
+            "prefix": "Z",
+            "number": "{zoom_number}"
+          },
+          {
+            "source": "<",
+            "syntax": "literal",
+            "semantic": "<"
+          },
+          {
+            "source": "{number}",
+            "syntax": "number",
+            "semantic": "number",
+            "value": "{number}"
+          }
+        ]
+      },
+      "text_template": "Constrain distortion from S0 to I of W{wavelength_number} Z{zoom_number} < {number}"
+    },
+    {
+      "rule_id": "T1_CUSTOM_002",
+      "pattern": "EFL Z{zoom_number} < {number}",
+      "canonical": {
+        "operation_type": "constrain",
+        "semantic_components": [
+          {
+            "source": "EFL",
+            "syntax": "literal",
+            "semantic": "EFL"
+          },
+          {
+            "source": "Z{zoom_number}",
+            "syntax": "prefix_number",
+            "semantic": "zoom",
+            "prefix": "Z",
+            "number": "{zoom_number}"
+          },
+          {
+            "source": "<",
+            "syntax": "literal",
+            "semantic": "<"
+          },
+          {
+            "source": "{number}",
+            "syntax": "number",
+            "semantic": "number",
+            "value": "{number}"
+          }
+        ]
+      },
+      "text_template": "Constrain EFL of Z{zoom_number} < {number}"
+    },
+    {
+      "rule_id": "T1_CUSTOM_003",
+      "pattern": "EFL Z{z_number} > {number}",
+      "canonical": {
+        "operation_type": "constrain",
+        "semantic_components": [
+          {
+            "source": "EFL",
+            "syntax": "literal",
+            "semantic": "EFL"
+          },
+          {
+            "source": "Z{z_number}",
+            "syntax": "prefix_number",
+            "semantic": "Z",
+            "prefix": "Z",
+            "number": "{z_number}"
+          },
+          {
+            "source": ">",
+            "syntax": "literal",
+            "semantic": ">"
+          },
+          {
+            "source": "{number}",
+            "syntax": "number",
+            "semantic": "number",
+            "value": "{number}"
+          }
+        ]
+      },
+      "text_template": "Constrain EFL Z{z_number} > {number}"
+    },
+    {
+      "rule_id": "T1_CUSTOM_004",
+      "pattern": "OAL S3..I Z{z_number} < {number}",
+      "canonical": {
+        "operation_type": "constrain",
+        "semantic_components": [
+          {
+            "source": "OAL",
+            "syntax": "literal",
+            "semantic": "OAL"
+          },
+          {
+            "source": "S3..I",
+            "syntax": "literal",
+            "semantic": "from S3 to I"
+          },
+          {
+            "source": "Z{z_number}",
+            "syntax": "prefix_number",
+            "semantic": "Z",
+            "prefix": "Z",
+            "number": "{z_number}"
+          },
+          {
+            "source": "<",
+            "syntax": "literal",
+            "semantic": "<"
+          },
+          {
+            "source": "{number}",
+            "syntax": "number",
+            "semantic": "number",
+            "value": "{number}"
+          }
+        ]
+      },
+      "text_template": "Constrain OAL from S3 to I Z{z_number} < {number}"
+    },
+    {
+      "rule_id": "T1_DEL_FIELD_EXPR",
+      "pattern": "DEL F{field}+1",
+      "canonical": {
+        "operation_type": "delete_field",
+        "field_expression": "F{field}+1"
+      },
+      "text_template": "Delete field F{field}+1"
+    },
+    {
+      "rule_id": "T1_SCO_OPERAND",
+      "pattern": "SCO S{surface} C{coefficient} {value}",
+      "canonical": {
+        "operation_type": "set_special_surface_operand",
+        "surface": "{surface}",
+        "operand": "C{coefficient}",
+        "value": "{value}"
+      },
+      "text_template": "Set special-surface operand C{coefficient} of S{surface} to {value}"
+    },
+    {
+      "rule_id": "T1_AUT_OAL_LT_RANGE",
+      "pattern": "OAL S{start}..{end} Z{zoom} < {value}",
+      "canonical": {
+        "operation_type": "constrain_oal",
+        "start_surface": "{start}",
+        "end": "{end}",
+        "zoom": "{zoom}",
+        "operator": "<",
+        "value": "{value}"
+      },
+      "text_template": "Constrain OAL from S{start} to {end} in Z{zoom} < {value}"
+    }
+  ],
+  "type3_rules": [
+    {
+      "rule_id": "T3_QCN_S3_S14_VARY_C4_C6",
+      "exact_commands": [
+        "SPS QCN S3",
+        "SCC S3  C4 0",
+        "SCC S3  C5 0",
+        "SCC S3  C6 0",
+        "SPS QCN S4",
+        "SCC S4  C4 0",
+        "SCC S4  C5 0",
+        "SCC S4  C6 0",
+        "SPS QCN S5",
+        "SCC S5  C4 0",
+        "SCC S5  C5 0",
+        "SCC S5  C6 0",
+        "SPS QCN S6",
+        "SCC S6  C4 0",
+        "SCC S6  C5 0",
+        "SCC S6  C6 0",
+        "SPS QCN S7",
+        "SCC S7  C4 0",
+        "SCC S7  C5 0",
+        "SCC S7  C6 0",
+        "SPS QCN S8",
+        "SCC S8  C4 0",
+        "SCC S8  C5 0",
+        "SCC S8  C6 0",
+        "SPS QCN S9",
+        "SCC S9  C4 0",
+        "SCC S9  C5 0",
+        "SCC S9  C6 0",
+        "SPS QCN S10",
+        "SCC S10  C4 0",
+        "SCC S10  C5 0",
+        "SCC S10  C6 0",
+        "SPS QCN S11",
+        "SCC S11  C4 0",
+        "SCC S11  C5 0",
+        "SCC S11  C6 0",
+        "SPS QCN S12",
+        "SCC S12  C4 0",
+        "SCC S12  C5 0",
+        "SCC S12  C6 0",
+        "SPS QCN S13",
+        "SCC S13  C4 0",
+        "SCC S13  C5 0",
+        "SCC S13  C6 0",
+        "SPS QCN S14",
+        "SCC S14  C4 0",
+        "SCC S14  C5 0",
+        "SCC S14  C6 0"
+      ],
+      "text": "Convert S3-S14 to Qcon aspheres and vary the 4th-, 6th-, and 8th-order Qcon coefficients"
+    },
+    {
+      "rule_id": "T3_QCN_S3_S14_FREEZE_C4_C6",
+      "exact_commands": [
+        "SCC S3  C4 100",
+        "SCC S3  C5 100",
+        "SCC S3  C6 100",
+        "SCC S4  C4 100",
+        "SCC S4  C5 100",
+        "SCC S4  C6 100",
+        "SCC S5  C4 100",
+        "SCC S5  C5 100",
+        "SCC S5  C6 100",
+        "SCC S6  C4 100",
+        "SCC S6  C5 100",
+        "SCC S6  C6 100",
+        "SCC S7  C4 100",
+        "SCC S7  C5 100",
+        "SCC S7  C6 100",
+        "SCC S8  C4 100",
+        "SCC S8  C5 100",
+        "SCC S8  C6 100",
+        "SCC S9  C4 100",
+        "SCC S9  C5 100",
+        "SCC S9  C6 100",
+        "SCC S10  C4 100",
+        "SCC S10  C5 100",
+        "SCC S10  C6 100",
+        "SCC S11  C4 100",
+        "SCC S11  C5 100",
+        "SCC S11  C6 100",
+        "SCC S12  C4 100",
+        "SCC S12  C5 100",
+        "SCC S12  C6 100",
+        "SCC S13  C4 100",
+        "SCC S13  C5 100",
+        "SCC S13  C6 100",
+        "SCC S14  C4 100",
+        "SCC S14  C5 100",
+        "SCC S14  C6 100"
+      ],
+      "text": "Freeze the 4th-, 6th-, and 8th-order Qcon coefficients of S3–S14"
+    },
+    {
+      "rule_id": "T3_CUSTOM_001",
+      "exact_commands": [
+        "INFINITE CONJUGATES"
+      ],
+      "text": "noise"
+    },
+    {
+      "rule_id": "T3_CUSTOM_002",
+      "exact_commands": [
+        "POSITION 1 New lens from CVMACRO:cvnewlens.seq"
+      ],
+      "text": "noise"
+    }
+  ]
+}

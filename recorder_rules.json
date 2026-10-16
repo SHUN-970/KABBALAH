@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "semantic_undo_map": {
+    "Automatic Design": [
+      "AUT; CAN;"
+    ],
+    "Global Synthesis": [
+      "AUT; CAN;"
+    ],
+    "Test Plate Fitting": [
+      "TES; CAN;"
+    ],
+    "Zoom Cam Design": [
+      "CAM; CAN;"
+    ],
+    "View Lens": [
+      "VIE; CAN;"
+    ],
+    "Environmental Change": [
+      "ENV; CAN;"
+    ],
+    "3D Viewing": [
+      "V3D; CAN;"
+    ],
+    "View Apertures": [
+      "VAP; CAN;"
+    ],
+    "View Interferogram": [
+      "FAB2; CAN;"
+    ],
+    "CODE V Drawing": [
+      "ELE; CAN;"
+    ],
+    "Gaussian Beam Trace": [
+      "BEA; CAN;"
+    ],
+    "First/Third Order Analysis": [
+      "ANA; CAN;"
+    ],
+    "Ray Aberration Curves": [
+      "RIM; CAN;"
+    ],
+    "OPD Aberration Curves": [
+      "RIM; CAN;"
+    ],
+    "Field Curves": [
+      "FIE; CAN;"
+    ],
+    "Pupil Map": [
+      "PMA; CAN;"
+    ],
+    "Field Map": [
+      "FMA; CAN;"
+    ],
+    "Footprint Plot": [
+      "FOO; CAN;"
+    ],
+    "Catseye Plot": [
+      "CAT; CAN;"
+    ],
+    "Biocular FOV Plot": [
+      "FOV; CAN;"
+    ],
+    "Spot Diagram": [
+      "SPO; CAN;"
+    ],
+    "Quadrant Analysis": [
+      "QUA; CAN;"
+    ],
+    "Radial Energy Analysis": [
+      "RAD; CAN;"
+    ],
+    "Detector Analysis": [
+      "GDE; CAN;"
+    ],
+    "Line Spread Function": [
+      "GLS; CAN;",
+      "LSF; CAN;"
+    ],
+    "MTF": [
+      "MTF; CAN;",
+      "TOR; CAN;"
+    ],
+    "Biocular Analysis": [
+      "BIO; CAN;"
+    ],
+    "Point Spread Function": [
+      "PSF; CAN;"
+    ],
+    "Detector Energy": [
+      "PSF; CAN;"
+    ],
+    "Encircled Energy": [
+      "PSF; CAN;"
+    ],
+    "Wavefront Analysis": [
+      "WAV; CAN;"
+    ],
+    "1D Partial Coherence": [
+      "PAR; CAN;"
+    ],
+    "2D Partial Coherence": [
+      "PAR; CAN;"
+    ],
+    "FFT Beam Propagation": [
+      "BPR; CAN;"
+    ],
+    "Beam Synthesis Propagation": [
+      "BSP; CAN;"
+    ],
+    "Fiber Coupling Efficiency": [
+      "CEF; CAN;",
+      "TOR; CAN;"
+    ],
+    "Bragg Diffraction Efficiency": [
+      "FMA; CAN;"
+    ],
+    "2D Image Simulation": [
+      "IMS; CAN;"
+    ],
+    "Fabrication Data Tables": [
+      "FAB1; CAN;"
+    ],
+    "Cost Analysis": [
+      "COS; CAN;"
+    ],
+    "Weight Analysis": [
+      "WEI; CAN"
+    ],
+    "Alignment Optimization": [
+      "ALI; CAN;"
+    ],
+    "Spectral Analysis": [
+      "SPE; CAN;"
+    ],
+    "Transmission Analysis": [
+      "TRA; CAN;"
+    ],
+    "Ghost Image Analysis": [
+      "GHO; CAN;"
+    ],
+    "Narcissus Analysis": [
+      "NAR; CAN;"
+    ],
+    "RMS wavefront error": [
+      "TOR; CAN;"
+    ],
+    "Polarization Dependent Loss": [
+      "TOR; CAN;"
+    ],
+    "Distortion": [
+      "TOD; CAN;"
+    ],
+    "User - Finite Differences": [
+      "!TOLFDIF; CAN;"
+    ],
+    "User - Monte Carlo": [
+      "!TOLMONTE; CAN;"
+    ],
+    "Illumination": [
+      "LUM; CAN;"
+    ],
+    "File Maintenance": [
+      "LIB; CAN;"
+    ],
+    "User Graphics...": [
+      "UGR; CAN;"
+    ],
+    "Delete surface": [
+      "DEL S{index}"
+    ],
+    "Insert Surface": [
+      "INS S{index}"
+    ]
+  }
+}
